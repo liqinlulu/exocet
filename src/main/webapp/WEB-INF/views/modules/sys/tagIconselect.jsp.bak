@@ -1,0 +1,361 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<html>
+<head>
+    <title>图标选择</title>
+	<meta name="decorator" content="blank"/>
+    <style type="text/css">
+    	.page-header {clear:both;margin:0 20px;padding-top:20px;}
+		.the-icons {padding:25px 10px 15px;list-style:none;}
+		.the-icons li {float:left;width:22%;line-height:25px;margin:2px 5px;cursor:pointer;}
+		.the-icons i {margin:1px 5px;font-size:16px;} .the-icons li:hover {background-color:#efefef;}
+        .the-icons li.active {background-color:#0088CC;color:#ffffff;}
+        .the-icons li:hover i{font-size:20px;}
+    </style>
+    <script type="text/javascript">
+	    $(document).ready(function(){
+	    	$("#icons li").click(function(){
+	    		$("#icons li").removeClass("active");
+	    		$("#icons li i").removeClass("icon-white");
+	    		$(this).addClass("active");
+	    		$(this).children("i").addClass("icon-white");
+	    		$("#icon").val($(this).text());
+	    	});
+	    	$("#icons li").each(function(){
+	    		if ($(this).text()=="${value}"){
+	    			$(this).click();
+	    		}
+	    	});
+	    	$("#icons li").dblclick(function(){
+	    		top.$.jBox.getBox().find("button[value='ok']").trigger("click");
+	    	});
+	    });
+    </script>
+</head>
+<body>
+<input type="hidden" id="icon" value="${value}" />
+<div id="icons">
+		
+	    <h2 class="page-header"> Web 应用的图标</h2>
+	    
+	    <ul class="the-icons">
+	      <li><i class="adjust"></i> adjust</li>
+	      <li><i class="asterisk"></i> asterisk</li>
+	      <li><i class="ban-circle"></i> ban-circle</li>
+	      <li><i class="bar-chart"></i> bar-chart</li>
+	      <li><i class="barcode"></i> barcode</li>
+	      <li><i class="beaker"></i> beaker</li>
+	      <li><i class="beer"></i> beer</li>
+	      <li><i class="bell"></i> bell</li>
+	      <li><i class="bell-alt"></i> bell-alt</li>
+	      <li><i class="bolt"></i> bolt</li>
+	      <li><i class="book"></i> book</li>
+	      <li><i class="bookmark"></i> bookmark</li>
+	      <li><i class="bookmark-empty"></i> bookmark-empty</li>
+	      <li><i class="briefcase"></i> briefcase</li>
+	      <li><i class="bullhorn"></i> bullhorn</li>
+	      <li><i class="calendar"></i> calendar</li>
+	      <li><i class="camera"></i> camera</li>
+	      <li><i class="camera-retro"></i> camera-retro</li>
+	      <li><i class="certificate"></i> certificate</li>
+	      <li><i class="check"></i> check</li>
+	      <li><i class="check-empty"></i> check-empty</li>
+	      <li><i class="circle"></i> circle</li>
+	      <li><i class="circle-blank"></i> circle-blank</li>
+	      <li><i class="cloud"></i> cloud</li>
+	      <li><i class="cloud-download"></i> cloud-download</li>
+	      <li><i class="cloud-upload"></i> cloud-upload</li>
+	      <li><i class="coffee"></i> coffee</li>
+	      <li><i class="cog"></i> cog</li>
+	      <li><i class="cogs"></i> cogs</li>
+	      <li><i class="comment"></i> comment</li>
+	      <li><i class="comment-alt"></i> comment-alt</li>
+	      <li><i class="comments"></i> comments</li>
+	      <li><i class="comments-alt"></i> comments-alt</li>
+	      <li><i class="credit-card"></i> credit-card</li>
+	      <li><i class="dashboard"></i> dashboard</li>
+	      <li><i class="desktop"></i> desktop</li>
+	      <li><i class="download"></i> download</li>
+	      <li><i class="download-alt"></i> download-alt</li>
+	    
+
+	      <li><i class="edit"></i> edit</li>
+	      <li><i class="envelope"></i> envelope</li>
+	      <li><i class="envelope-alt"></i> envelope-alt</li>
+	      <li><i class="exchange"></i> exchange</li>
+	      <li><i class="exclamation-sign"></i> exclamation-sign</li>
+	      <li><i class="external-link"></i> external-link</li>
+	      <li><i class="eye-close"></i> eye-close</li>
+	      <li><i class="eye-open"></i> eye-open</li>
+	      <li><i class="facetime-video"></i> facetime-video</li>
+	      <li><i class="fighter-jet"></i> fighter-jet</li>
+	      <li><i class="film"></i> film</li>
+	      <li><i class="filter"></i> filter</li>
+	      <li><i class="fire"></i> fire</li>
+	      <li><i class="flag"></i> flag</li>
+	      <li><i class="folder-close"></i> folder-close</li>
+	      <li><i class="folder-open"></i> folder-open</li>
+	      <li><i class="folder-close-alt"></i> folder-close-alt</li>
+	      <li><i class="folder-open-alt"></i> folder-open-alt</li>
+	      <li><i class="food"></i> food</li>
+	      <li><i class="gift"></i> gift</li>
+	      <li><i class="glass"></i> glass</li>
+	      <li><i class="globe"></i> globe</li>
+	      <li><i class="group"></i> group</li>
+	      <li><i class="hdd"></i> hdd</li>
+	      <li><i class="headphones"></i> headphones</li>
+	      <li><i class="heart"></i> heart</li>
+	      <li><i class="heart-empty"></i> heart-empty</li>
+	      <li><i class="home"></i> home</li>
+	      <li><i class="inbox"></i> inbox</li>
+	      <li><i class="info-sign"></i> info-sign</li>
+	      <li><i class="key"></i> key</li>
+	      <li><i class="leaf"></i> leaf</li>
+	      <li><i class="laptop"></i> laptop</li>
+	      <li><i class="legal"></i> legal</li>
+	      <li><i class="lemon"></i> lemon</li>
+	      <li><i class="lightbulb"></i> lightbulb</li>
+	      <li><i class="lock"></i> lock</li>
+	      <li><i class="unlock"></i> unlock</li>
+	    
+
+	      <li><i class="magic"></i> magic</li>
+	      <li><i class="magnet"></i> magnet</li>
+	      <li><i class="map-marker"></i> map-marker</li>
+	      <li><i class="minus"></i> minus</li>
+	      <li><i class="minus-sign"></i> minus-sign</li>
+	      <li><i class="mobile-phone"></i> mobile-phone</li>
+	      <li><i class="money"></i> money</li>
+	      <li><i class="move"></i> move</li>
+	      <li><i class="music"></i> music</li>
+	      <li><i class="off"></i> off</li>
+	      <li><i class="ok"></i> ok</li>
+	      <li><i class="ok-circle"></i> ok-circle</li>
+	      <li><i class="ok-sign"></i> ok-sign</li>
+	      <li><i class="pencil"></i> pencil</li>
+	      <li><i class="picture"></i> picture</li>
+	      <li><i class="plane"></i> plane</li>
+	      <li><i class="plus"></i> plus</li>
+	      <li><i class="plus-sign"></i> plus-sign</li>
+	      <li><i class="print"></i> print</li>
+	      <li><i class="pushpin"></i> pushpin</li>
+	      <li><i class="qrcode"></i> qrcode</li>
+	      <li><i class="question-sign"></i> question-sign</li>
+	      <li><i class="quote-left"></i> quote-left</li>
+	      <li><i class="quote-right"></i> quote-right</li>
+	      <li><i class="random"></i> random</li>
+	      <li><i class="refresh"></i> refresh</li>
+	      <li><i class="remove"></i> remove</li>
+	      <li><i class="remove-circle"></i> remove-circle</li>
+	      <li><i class="remove-sign"></i> remove-sign</li>
+	      <li><i class="reorder"></i> reorder</li>
+	      <li><i class="reply"></i> reply</li>
+	      <li><i class="resize-horizontal"></i> resize-horizontal</li>
+	      <li><i class="resize-vertical"></i> resize-vertical</li>
+	      <li><i class="retweet"></i> retweet</li>
+	      <li><i class="road"></i> road</li>
+	      <li><i class="rss"></i> rss</li>
+	      <li><i class="screenshot"></i> screenshot</li>
+	      <li><i class="search"></i> search</li>
+	    
+
+	      <li><i class="share"></i> share</li>
+	      <li><i class="share-alt"></i> share-alt</li>
+	      <li><i class="shopping-cart"></i> shopping-cart</li>
+	      <li><i class="signal"></i> signal</li>
+	      <li><i class="signin"></i> signin</li>
+	      <li><i class="signout"></i> signout</li>
+	      <li><i class="sitemap"></i> sitemap</li>
+	      <li><i class="sort"></i> sort</li>
+	      <li><i class="sort-down"></i> sort-down</li>
+	      <li><i class="sort-up"></i> sort-up</li>
+	      <li><i class="spinner"></i> spinner</li>
+	      <li><i class="star"></i> star</li>
+	      <li><i class="star-empty"></i> star-empty</li>
+	      <li><i class="star-half"></i> star-half</li>
+	      <li><i class="tablet"></i> tablet</li>
+	      <li><i class="tag"></i> tag</li>
+	      <li><i class="tags"></i> tags</li>
+	      <li><i class="tasks"></i> tasks</li>
+	      <li><i class="thumbs-down"></i> thumbs-down</li>
+	      <li><i class="thumbs-up"></i> thumbs-up</li>
+	      <li><i class="time"></i> time</li>
+	      <li><i class="tint"></i> tint</li>
+	      <li><i class="trash"></i> trash</li>
+	      <li><i class="trophy"></i> trophy</li>
+	      <li><i class="truck"></i> truck</li>
+	      <li><i class="umbrella"></i> umbrella</li>
+	      <li><i class="upload"></i> upload</li>
+	      <li><i class="upload-alt"></i> upload-alt</li>
+	      <li><i class="user"></i> user</li>
+	      <li><i class="user-md"></i> user-md</li>
+	      <li><i class="volume-off"></i> volume-off</li>
+	      <li><i class="volume-down"></i> volume-down</li>
+	      <li><i class="volume-up"></i> volume-up</li>
+	      <li><i class="warning-sign"></i> warning-sign</li>
+	      <li><i class="wrench"></i> wrench</li>
+	      <li><i class="zoom-in"></i> zoom-in</li>
+	      <li><i class="zoom-out"></i> zoom-out</li>
+	    </ul>
+	
+	  
+	    <h2 class="page-header">文本编辑器图标</h2>
+	  
+	    <ul class="the-icons">
+	      <li><i class="file"></i> file</li>
+	      <li><i class="file-alt"></i> file-alt</li>
+	      <li><i class="cut"></i> cut</li>
+	      <li><i class="copy"></i> copy</li>
+	      <li><i class="paste"></i> paste</li>
+	      <li><i class="save"></i> save</li>
+	      <li><i class="undo"></i> undo</li>
+	      <li><i class="repeat"></i> repeat</li>
+	    
+
+	      <li><i class="text-height"></i> text-height</li>
+	      <li><i class="text-width"></i> text-width</li>
+	      <li><i class="align-left"></i> align-left</li>
+	      <li><i class="align-center"></i> align-center</li>
+	      <li><i class="align-right"></i> align-right</li>
+	      <li><i class="align-justify"></i> align-justify</li>
+	      <li><i class="indent-left"></i> indent-left</li>
+	      <li><i class="indent-right"></i> indent-right</li>
+	    
+
+	      <li><i class="font"></i> font</li>
+	      <li><i class="bold"></i> bold</li>
+	      <li><i class="italic"></i> italic</li>
+	      <li><i class="strikethrough"></i> strikethrough</li>
+	      <li><i class="underline"></i> underline</li>
+	      <li><i class="link"></i> link</li>
+	      <li><i class="paper-clip"></i> paper-clip</li>
+	      <li><i class="columns"></i> columns</li>
+	    
+
+	      <li><i class="table"></i> table</li>
+	      <li><i class="th-large"></i> th-large</li>
+	      <li><i class="th"></i> th</li>
+	      <li><i class="th-list"></i> th-list</li>
+	      <li><i class="list"></i> list</li>
+	      <li><i class="list-ol"></i> list-ol</li>
+	      <li><i class="list-ul"></i> list-ul</li>
+	      <li><i class="list-alt"></i> list-alt</li>
+	    </ul>
+	
+	    <h2 class="page-header">指示方向的图标</h2>
+	  
+	    <ul class="the-icons">
+	      <li><i class="angle-left"></i> angle-left</li>
+	      <li><i class="angle-right"></i> angle-right</li>
+	      <li><i class="angle-up"></i> angle-up</li>
+	      <li><i class="angle-down"></i> angle-down</li>
+	      <li><i class="arrow-down"></i> arrow-down</li>
+	      <li><i class="arrow-left"></i> arrow-left</li>
+	      <li><i class="arrow-right"></i> arrow-right</li>
+	      <li><i class="arrow-up"></i> arrow-up</li>
+	    
+
+	      <li><i class="caret-down"></i> caret-down</li>
+	      <li><i class="caret-left"></i> caret-left</li>
+	      <li><i class="caret-right"></i> caret-right</li>
+	      <li><i class="caret-up"></i> caret-up</li>
+	      <li><i class="chevron-down"></i> chevron-down</li>
+	      <li><i class="chevron-left"></i> chevron-left</li>
+	      <li><i class="chevron-right"></i> chevron-right</li>
+	      <li><i class="chevron-up"></i> chevron-up</li>
+	    
+
+	      <li><i class="circle-arrow-down"></i> circle-arrow-down</li>
+	      <li><i class="circle-arrow-left"></i> circle-arrow-left</li>
+	      <li><i class="circle-arrow-right"></i> circle-arrow-right</li>
+	      <li><i class="circle-arrow-up"></i> circle-arrow-up</li>
+	      <li><i class="double-angle-left"></i> double-angle-left</li>
+	      <li><i class="double-angle-right"></i> double-angle-right</li>
+	      <li><i class="double-angle-up"></i> double-angle-up</li>
+	      <li><i class="double-angle-down"></i> double-angle-down</li>
+	    
+
+	      <li><i class="hand-down"></i> hand-down</li>
+	      <li><i class="hand-left"></i> hand-left</li>
+	      <li><i class="hand-right"></i> hand-right</li>
+	      <li><i class="hand-up"></i> hand-up</li>
+	      <li><i class="circle"></i> circle</li>
+	      <li><i class="circle-blank"></i> circle-blank</li>
+	    </ul>
+	  
+	
+	    <h2 class="page-header">视频播放器图标</h2>
+	  
+	    <ul class="the-icons">
+	      <li><i class="play-circle"></i> play-circle</li>
+	      <li><i class="play"></i> play</li>
+	      <li><i class="pause"></i> pause</li>
+	      <li><i class="stop"></i> stop</li>
+	    
+
+	      <li><i class="step-backward"></i> step-backward</li>
+	      <li><i class="fast-backward"></i> fast-backward</li>
+	      <li><i class="backward"></i> backward</li>
+	      <li><i class="forward"></i> forward</li>
+	    
+
+	      <li><i class="fast-forward"></i> fast-forward</li>
+	      <li><i class="step-forward"></i> step-forward</li>
+	      <li><i class="eject"></i> eject</li>
+	    
+
+	      <li><i class="fullscreen"></i> fullscreen</li>
+	      <li><i class="resize-full"></i> resize-full</li>
+	      <li><i class="resize-small"></i> resize-small</li>
+	    </ul>
+	
+	
+	    <h2 class="page-header">SNS图标</h2>
+	  
+	    <ul class="the-icons">
+	      <li><i class="phone"></i> phone</li>
+	      <li><i class="phone-sign"></i> phone-sign</li>
+	      <li><i class="facebook"></i> facebook</li>
+	      <li><i class="facebook-sign"></i> facebook-sign</li>
+	    
+
+	      <li><i class="twitter"></i> twitter</li>
+	      <li><i class="twitter-sign"></i> twitter-sign</li>
+	      <li><i class="github"></i> github</li>
+	      <li><i class="github-alt"></i> github-alt</li>
+	    
+
+	      <li><i class="github-sign"></i> github-sign</li>
+	      <li><i class="linkedin"></i> linkedin</li>
+	      <li><i class="linkedin-sign"></i> linkedin-sign</li>
+	      <li><i class="pinterest"></i> pinterest</li>
+	    
+
+	      <li><i class="pinterest-sign"></i> pinterest-sign</li>
+	      <li><i class="google-plus"></i> google-plus</li>
+	      <li><i class="google-plus-sign"></i> google-plus-sign</li>
+	      <li><i class="sign-blank"></i> sign-blank</li>
+	    </ul>
+	  
+	  
+	    <h2 class="page-header">医疗图标</h2>
+	  
+	    <ul class="the-icons">
+	      <li><i class="ambulance"></i> ambulance</li>
+	      <li><i class="beaker"></i> beaker</li>
+	    
+
+	      <li><i class="h-sign"></i> h-sign</li>
+	      <li><i class="hospital"></i> hospital</li>
+	    
+
+	      <li><i class="medkit"></i> medkit</li>
+	      <li><i class="plus-sign-alt"></i> plus-sign-alt</li>
+	    
+
+	      <li><i class="stethoscope"></i> stethoscope</li>
+	      <li><i class="user-md"></i> user-md</li>
+	    </ul>
+	<br/><br/>
+</div>
+</body>

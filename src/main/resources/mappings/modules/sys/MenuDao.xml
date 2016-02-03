@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.exocet.modules.sys.dao.MenuDao">
+
+	<resultMap id="menuResultMap" type="Menu">
+		<id property="id" column="id" javaType="string" jdbcType="VARCHAR" /><!-- 父节点 -->
+		<result property="name" column="name" javaType="string" jdbcType="VARCHAR" />		
+		<result property="href" column="href" javaType="string" jdbcType="VARCHAR" />
+		<result property="target" column="target" javaType="string" jdbcType="VARCHAR" />
+		<result property="icon" column="icon" javaType="string" jdbcType="VARCHAR" />
+		<result property="sort" column="sort" javaType="Integer" jdbcType="DECIMAL" />
+		<result property="isShow" column="is_show" javaType="string" jdbcType="VARCHAR" />
+		<result property="permission" column="permission" javaType="string" jdbcType="VARCHAR" />
+		<result property="remarks" column="remarks" javaType="string" jdbcType="VARCHAR" />		
+		<result property="parent.id" column="parent.id" javaType="string" jdbcType="VARCHAR" />
+		<result property="parent.name" column="name" javaType="string" jdbcType="VARCHAR" />
+		<result property="parentIds" column="parent_ids" javaType="string" jdbcType="VARCHAR" />		
+		
+		<collection property="childList" ofType="Menu" javaType="arrayList">
+			<id property="id" column="cid"/>
+			<result property="name" column="cname" javaType="string" jdbcType="VARCHAR" />
+			<result property="href" column="chref" javaType="string" jdbcType="VARCHAR" />
+			<result property="target" column="ctarget" javaType="string" jdbcType="VARCHAR" />
+			<result property="icon" column="cicon" javaType="string" jdbcType="VARCHAR" />
+			<result property="sort" column="csort" javaType="Integer" jdbcType="DECIMAL" />
+			<result property="isShow" column="cis_show" javaType="string" jdbcType="VARCHAR" />
+			<result property="permission" column="cpermission" javaType="string" jdbcType="VARCHAR" />
+			<result property="remarks" column="cremarks" javaType="string" jdbcType="VARCHAR" />
+			<result property="parent.id" column="id" javaType="string" jdbcType="VARCHAR" />
+			<result property="parent.name" column="name" javaType="string" jdbcType="VARCHAR" />
+			<result property="parentIds" column="parent_ids" javaType="string" jdbcType="VARCHAR" />
+				
+			<collection property="childList" column="cid" javaType="arrayList" 	ofType="Menu" select="menutreeData"/>
+		</collection>
+	</resultMap>	
+	
+	<select id="menutreeData" parameterType="Menu" resultMap="menuResultMap">
+		SELECT 
+		  parent.id,
+		  parent.name,
+		  child.id cid,
+		  child.name cname ,  
+		  parent.parent_id AS "parent.id", 
+		  parent.name AS "parent.name",
+		  parent.parent_ids,  
+		  parent.href,
+		  parent.target,
+		  parent.icon,
+		  parent.sort,
+		  parent.is_show,
+		  parent.permission,
+		  parent.remarks,
+		  parent.create_by AS "createBy.id",
+		  parent.create_date,
+		  parent.update_by AS "updateBy.id",
+		  parent.update_date,
+		  parent.del_flag,		    
+		  child.href AS chref,
+		  child.target AS ctarget,
+		  child.icon AS cicon,
+		  child.sort AS csort,
+		  child.is_show AS cis_show,
+		  child.permission AS cpermission,
+		  child.remarks AS cremarks 
+		FROM
+		  sys_menu parent 
+		  INNER JOIN sys_menu child 
+		    ON (child.parent_id = parent.id) 
+				WHERE  parent.del_flag = #{DEL_FLAG_NORMAL} 
+				<!-- and parent.id = #{id} -->
+		ORDER BY parent.sort
+	</select>
+
+	<sql id="menuColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		(SELECT GROUP_CONCAT(id) FROM sys_menu b WHERE b.parent_id=a.id) AS childs,
+		(SELECT GROUP_CONCAT(is_show) FROM sys_menu b  WHERE b.parent_id = a.id) AS cisshow,
+		a.name,
+		a.href,
+		a.target,
+		a.icon,
+		a.sort,
+		a.is_show,
+		a.permission,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS
+		"updateBy.id",
+		a.update_date,
+		a.del_flag,
+		p.name AS "parent.name"
+	</sql>
+
+	<sql id="menuJoins">
+		LEFT JOIN sys_menu p ON p.id = a.parent_id
+	</sql>
+
+	<select id="get" resultType="Menu">
+		SELECT
+		<include refid="menuColumns" />
+		FROM sys_menu a
+		<include refid="menuJoins" />
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findAllList" resultType="Menu">
+		SELECT
+		<include refid="menuColumns" />
+		FROM sys_menu a
+		<include refid="menuJoins" />
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY a.sort
+	</select>
+
+	<select id="">
+		SELECT
+		<include refid="menuColumns" />
+		FROM sys_menu a left join sys_menu b on a.id = s.group_id
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY a.sort
+	</select>
+
+	<select id="findByParentIdsLike" resultType="Menu">
+		SELECT
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids
+		FROM sys_menu a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids
+		LIKE #{parentIds}
+		ORDER BY a.sort
+	</select>
+
+	<select id="findByUserId" resultType="Menu">
+		SELECT DISTINCT
+		<include refid="menuColumns" />
+		FROM sys_menu a
+		LEFT JOIN sys_menu p ON p.id = a.parent_id
+		JOIN
+		sys_role_menu rm ON rm.menu_id = a.id
+		JOIN sys_role r ON r.id =
+		rm.role_id AND r.useable='1'
+		JOIN sys_user_role ur ON ur.role_id = r.id
+		JOIN sys_user u ON u.id = ur.user_id AND u.id = #{userId}
+		WHERE
+		a.del_flag = #{DEL_FLAG_NORMAL} AND r.del_flag = #{DEL_FLAG_NORMAL}
+		AND u.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY a.sort
+	</select>
+
+	<insert id="insert">
+		INSERT INTO sys_menu(
+		id,
+		parent_id,
+		parent_ids,
+		name,
+		href,
+		target,
+		icon,
+		sort,
+		is_show,
+		permission,
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		del_flag
+		) VALUES (
+		#{id},
+		#{parent.id},
+		#{parentIds},
+		#{name},
+		#{href},
+		#{target},
+		#{icon},
+		#{sort},
+		#{isShow},
+		#{permission},
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{delFlag}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_menu SET
+		parent_id = #{parent.id},
+		parent_ids = #{parentIds},
+		name = #{name},
+		href = #{href},
+		target = #{target},
+		icon = #{icon},
+		sort = #{sort},
+		is_show = #{isShow},
+		permission = #{permission},
+		update_by = #{updateBy.id},
+		update_date = #{updateDate},
+		remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateParentIds">
+		UPDATE sys_menu SET
+		parent_id = #{parent.id},
+		parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateSort">
+		UPDATE sys_menu SET
+		sort = #{sort}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		UPDATE sys_menu SET
+		del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id} OR parent_ids LIKE
+		<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+		<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+		<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+
+</mapper>

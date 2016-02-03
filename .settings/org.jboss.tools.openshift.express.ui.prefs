@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+org.jboss.tools.openshift.ApplicationId=56b1a1f72d5271f4000000ab
+org.jboss.tools.openshift.ApplicationName=exocet
+org.jboss.tools.openshift.Connection=https\://liqinlulu%40163.com@
+org.jboss.tools.openshift.DeployFolder=webapps
+org.jboss.tools.openshift.Domain=chinlq
+org.jboss.tools.openshift.RemoteName=openshift

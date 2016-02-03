@@ -1,0 +1,41 @@
+.navbar-form-custom .form-control {
+	background:none repeat scroll 0 0 rgba(0,0,0,0);
+	border:medium none;
+	font-size:14px;
+	height:60px;
+	margin:0;
+	z-index:2000
+}
+.form-control,.form-control:focus,.has-error .form-control:focus,.has-success .form-control:focus,.has-warning .form-control:focus,.navbar-collapse,.navbar-form,.navbar-form-custom .form-control:focus,.navbar-form-custom .form-control:hover,.open .btn.dropdown-toggle,.panel,.popover,.progress,.progress-bar {
+	box-shadow:none
+}
+
+.label {
+	background-color:#d1dade;
+	color:#5e5e5e;
+	font-size:10px;
+	font-weight:600;
+	padding:3px 8px;
+	text-shadow:none
+}
+.form-control,.single-line {
+	background-color:#FFF;
+	background-image:none;
+	border:1px solid #e5e6e7;
+	border-radius:1px;
+	color:inherit;
+	display:block;
+	padding:6px 12px;
+	-webkit-transition:border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+	transition:border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+	width:70%;
+	height: 28px;
+	font-size:14px
+}
+.form-control:focus,.single-line:focus {
+	border-color:#1ab394!important
+}
+
+.form-control.error {
+	border:1px dotted #cc5965
+}

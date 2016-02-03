@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.exocet.modules.crm.dao.CrmCustomerDao">
+    
+	<sql id="crmCustomerColumns">
+		a.id AS "id",
+		a.ccode AS "ccode",
+		a.cname AS "cname",
+		a.cphone AS "cphone",
+		a.ctel AS "ctel",
+		a.cfax AS "cfax",
+		a.cmainlinkman AS "cmainlinkman",
+		a.linkphone AS "linkphone",
+		a.address AS "address",
+		a.email AS "email",
+		a.ctype AS "ctype",
+		a.cstage AS "cstage",
+		a.cstatus AS "cstatus",
+		a.clevel AS "clevel",
+		a.csource AS "csource",
+		a.ccategory AS "ccategory",
+		a.cprovince AS "cprovince",
+		a.ccity AS "ccity",
+		a.curl AS "curl",
+		a.adddate AS "adddate",
+		a.orgid AS "orgid",
+		a.create_date AS "createDatetime",
+		a.create_by AS "createBy.id",
+		a.update_date AS "updateDatetime",
+		a.update_by AS "updateBy.id",
+		a.dtype AS "dtype"
+	</sql>
+	
+	<sql id="crmCustomerJoins">
+	</sql>
+    
+	<select id="get" resultType="CrmCustomer">
+		SELECT 
+			<include refid="crmCustomerColumns"/>
+		FROM crm_customer a
+		<include refid="crmCustomerJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmCustomer">
+		SELECT 
+			<include refid="crmCustomerColumns"/>
+		FROM crm_customer a
+		<include refid="crmCustomerJoins"/>
+		<where>
+			
+			<if test="email != null and email != ''">
+				AND a.email = #{email}
+			</if>
+			<if test="ctype != null and ctype != ''">
+				AND a.ctype = #{ctype}
+			</if>
+			<if test="cstage != null and cstage != ''">
+				AND a.cstage = #{cstage}
+			</if>
+			<if test="cstatus != null and cstatus != ''">
+				AND a.cstatus = #{cstatus}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmCustomer">
+		SELECT 
+			<include refid="crmCustomerColumns"/>
+		FROM crm_customer a
+		<include refid="crmCustomerJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_customer(
+			id,
+			ccode,
+			cname,
+			cphone,
+			ctel,
+			cfax,
+			cmainlinkman,
+			linkphone,
+			address,
+			email,
+			ctype,
+			cstage,
+			cstatus,
+			clevel,
+			csource,
+			ccategory,
+			cprovince,
+			ccity,
+			curl,
+			adddate,
+			orgid,
+			create_date,
+			create_by,
+			update_date,
+			update_by,
+			dtype
+		) VALUES (
+			#{id},
+			#{ccode},
+			#{cname},
+			#{cphone},
+			#{ctel},
+			#{cfax},
+			#{cmainlinkman},
+			#{linkphone},
+			#{address},
+			#{email},
+			#{ctype},
+			#{cstage},
+			#{cstatus},
+			#{clevel},
+			#{csource},
+			#{ccategory},
+			#{cprovince},
+			#{ccity},
+			#{curl},
+			#{adddate},
+			#{orgid},
+			#{createDatetime},
+			#{createBy.id},
+			#{updateDatetime},
+			#{updateBy.id},
+			#{dtype}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_customer SET 	
+			ccode = #{ccode},
+			cname = #{cname},
+			cphone = #{cphone},
+			ctel = #{ctel},
+			cfax = #{cfax},
+			cmainlinkman = #{cmainlinkman},
+			linkphone = #{linkphone},
+			address = #{address},
+			email = #{email},
+			ctype = #{ctype},
+			cstage = #{cstage},
+			cstatus = #{cstatus},
+			clevel = #{clevel},
+			csource = #{csource},
+			ccategory = #{ccategory},
+			cprovince = #{cprovince},
+			ccity = #{ccity},
+			curl = #{curl},
+			adddate = #{adddate},
+			dtype = #{dtype}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM crm_customer
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
